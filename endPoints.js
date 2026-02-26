@@ -5,7 +5,8 @@ import jwt from 'jsonwebtoken';
 
 const cookieOptions = {
     httpOnly: true,
-    secure: false,
+    sameSite:'none',
+    secure: true,
     signed: true,
     maxAge: 24 * 60 * 60 * 1000
 };
@@ -68,8 +69,9 @@ export const Login = async (req, res) => {
 export const Logout = async (req, res) => {
     res.clearCookie('token', {
         httpOnly: true,
-        secure: false,
-        signed: true
+        secure: true,
+        signed: true,
+        sameSite:'none',
     })
     res.status(200).json({ mess: 'Logged out successfully' })
 }
